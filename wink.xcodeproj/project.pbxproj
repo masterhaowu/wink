@@ -14,6 +14,7 @@
 		750225F51ECAEDC200E41A90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750225F31ECAEDC200E41A90 /* LaunchScreen.storyboard */; };
 		750226001ECAEDC300E41A90 /* winkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750225FF1ECAEDC300E41A90 /* winkTests.swift */; };
 		7502260B1ECAEDC300E41A90 /* winkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502260A1ECAEDC300E41A90 /* winkUITests.swift */; };
+		75ED0B6C1ECBFBD3002F0E7E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ED0B6B1ECBFBD3002F0E7E /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		750226061ECAEDC300E41A90 /* winkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = winkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7502260A1ECAEDC300E41A90 /* winkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = winkUITests.swift; sourceTree = "<group>"; };
 		7502260C1ECAEDC300E41A90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75ED0B6B1ECBFBD3002F0E7E /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,8 @@
 		750225E91ECAEDC200E41A90 /* wink */ = {
 			isa = PBXGroup;
 			children = (
+				75ED0B6A1ECBFB95002F0E7E /* Controller */,
 				750225EA1ECAEDC200E41A90 /* AppDelegate.swift */,
-				750225EC1ECAEDC200E41A90 /* ViewController.swift */,
 				750225EE1ECAEDC200E41A90 /* Main.storyboard */,
 				750225F11ECAEDC200E41A90 /* Assets.xcassets */,
 				750225F31ECAEDC200E41A90 /* LaunchScreen.storyboard */,
@@ -123,6 +125,15 @@
 				7502260C1ECAEDC300E41A90 /* Info.plist */,
 			);
 			path = winkUITests;
+			sourceTree = "<group>";
+		};
+		75ED0B6A1ECBFB95002F0E7E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				75ED0B6B1ECBFBD3002F0E7E /* LoginController.swift */,
+				750225EC1ECAEDC200E41A90 /* ViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				750225ED1ECAEDC200E41A90 /* ViewController.swift in Sources */,
+				75ED0B6C1ECBFBD3002F0E7E /* LoginController.swift in Sources */,
 				750225EB1ECAEDC200E41A90 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +519,7 @@
 				750226111ECAEDC300E41A90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		750226121ECAEDC300E41A90 /* Build configuration list for PBXNativeTarget "winkTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +528,7 @@
 				750226141ECAEDC300E41A90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		750226151ECAEDC300E41A90 /* Build configuration list for PBXNativeTarget "winkUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +537,7 @@
 				750226171ECAEDC300E41A90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+
+
 
 class LoginController: UIViewController {
     
@@ -30,8 +33,52 @@ class LoginController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        
         return button
     }()
+    
+    
+    func handleRegister() {
+        guard let email = emailTextField.text,
+            let password = passwordTextField.text,
+            let name = nameTextField.text
+        else {
+
+            return
+        }
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
+            if error != nil {
+                print("an error has occurred")
+                //print(error)
+                return
+            }
+            
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            //authentication successful
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            
+            let usersReference = ref.child("users").child(uid)
+            
+            let values = ["name": name, "email": email]
+            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                if err != nil {
+                    print("an error has occurred during updateChildValues")
+                    return
+                }
+                
+                print("user info saved!")
+            })
+            
+        })
+        
+        
+        
+    }
     
     
     let nameTextField: UITextField = {
@@ -164,6 +211,9 @@ class LoginController: UIViewController {
         profileImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
     }
+    
+    
+    
     
     
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40C8073D61FC5C821B00AC06 /* Pods_winkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5E2A08BEE512EA13087AB0 /* Pods_winkTests.framework */; };
 		750225EB1ECAEDC200E41A90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750225EA1ECAEDC200E41A90 /* AppDelegate.swift */; };
 		750225ED1ECAEDC200E41A90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750225EC1ECAEDC200E41A90 /* ViewController.swift */; };
 		750225F01ECAEDC200E41A90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750225EE1ECAEDC200E41A90 /* Main.storyboard */; };
@@ -14,7 +15,10 @@
 		750225F51ECAEDC200E41A90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750225F31ECAEDC200E41A90 /* LaunchScreen.storyboard */; };
 		750226001ECAEDC300E41A90 /* winkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750225FF1ECAEDC300E41A90 /* winkTests.swift */; };
 		7502260B1ECAEDC300E41A90 /* winkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502260A1ECAEDC300E41A90 /* winkUITests.swift */; };
+		7571A6F71ED3F0F000712356 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7571A6F61ED3F0F000712356 /* GoogleService-Info.plist */; };
 		75ED0B6C1ECBFBD3002F0E7E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ED0B6B1ECBFBD3002F0E7E /* LoginController.swift */; };
+		B038F1B59BE80AF53B93194D /* Pods_wink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22E2998A59E10D8FD63472 /* Pods_wink.framework */; };
+		E4BF0F90A88F9E79620D7C08 /* Pods_winkUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8ED0104F42E556045ECA8AD /* Pods_winkUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		293917AF3ABA879FE7924B5D /* Pods-wink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wink/Pods-wink.debug.xcconfig"; sourceTree = "<group>"; };
+		2A22E2998A59E10D8FD63472 /* Pods_wink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4936F716D50B5778D6012264 /* Pods-wink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wink.release.xcconfig"; path = "Pods/Target Support Files/Pods-wink/Pods-wink.release.xcconfig"; sourceTree = "<group>"; };
+		525F18FDD612A49DA2F1CAA6 /* Pods-winkUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winkUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-winkUITests/Pods-winkUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5E5E2A08BEE512EA13087AB0 /* Pods_winkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_winkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		750225E71ECAEDC200E41A90 /* wink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		750225EA1ECAEDC200E41A90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		750225EC1ECAEDC200E41A90 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +57,12 @@
 		750226061ECAEDC300E41A90 /* winkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = winkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7502260A1ECAEDC300E41A90 /* winkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = winkUITests.swift; sourceTree = "<group>"; };
 		7502260C1ECAEDC300E41A90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7571A6F61ED3F0F000712356 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75ED0B6B1ECBFBD3002F0E7E /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		B8ED0104F42E556045ECA8AD /* Pods_winkUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_winkUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB17C0DA4C021581CC48B923 /* Pods-winkUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winkUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-winkUITests/Pods-winkUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EEB69CD64F47A87051206124 /* Pods-winkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-winkTests/Pods-winkTests.release.xcconfig"; sourceTree = "<group>"; };
+		F6FC0EEBC3EE2E1C01F3B3D6 /* Pods-winkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winkTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-winkTests/Pods-winkTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B038F1B59BE80AF53B93194D /* Pods_wink.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40C8073D61FC5C821B00AC06 /* Pods_winkTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +86,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4BF0F90A88F9E79620D7C08 /* Pods_winkUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7052B18C9E436935CB0B3BB2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				293917AF3ABA879FE7924B5D /* Pods-wink.debug.xcconfig */,
+				4936F716D50B5778D6012264 /* Pods-wink.release.xcconfig */,
+				F6FC0EEBC3EE2E1C01F3B3D6 /* Pods-winkTests.debug.xcconfig */,
+				EEB69CD64F47A87051206124 /* Pods-winkTests.release.xcconfig */,
+				BB17C0DA4C021581CC48B923 /* Pods-winkUITests.debug.xcconfig */,
+				525F18FDD612A49DA2F1CAA6 /* Pods-winkUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		750225DE1ECAEDC200E41A90 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +113,8 @@
 				750225FE1ECAEDC300E41A90 /* winkTests */,
 				750226091ECAEDC300E41A90 /* winkUITests */,
 				750225E81ECAEDC200E41A90 /* Products */,
+				7052B18C9E436935CB0B3BB2 /* Pods */,
+				E3E137467651616F1F5D5F26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +137,7 @@
 				750225F11ECAEDC200E41A90 /* Assets.xcassets */,
 				750225F31ECAEDC200E41A90 /* LaunchScreen.storyboard */,
 				750225F61ECAEDC200E41A90 /* Info.plist */,
+				7571A6F61ED3F0F000712356 /* GoogleService-Info.plist */,
 			);
 			path = wink;
 			sourceTree = "<group>";
@@ -136,6 +169,16 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		E3E137467651616F1F5D5F26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A22E2998A59E10D8FD63472 /* Pods_wink.framework */,
+				5E5E2A08BEE512EA13087AB0 /* Pods_winkTests.framework */,
+				B8ED0104F42E556045ECA8AD /* Pods_winkUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +186,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7502260F1ECAEDC300E41A90 /* Build configuration list for PBXNativeTarget "wink" */;
 			buildPhases = (
+				2FADB483689739500EC0963B /* [CP] Check Pods Manifest.lock */,
 				750225E31ECAEDC200E41A90 /* Sources */,
 				750225E41ECAEDC200E41A90 /* Frameworks */,
 				750225E51ECAEDC200E41A90 /* Resources */,
+				F1DAB1B5D013EEA4C2B4F03D /* [CP] Embed Pods Frameworks */,
+				8740C6E43D40F6A68DDA94BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -160,9 +206,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 750226121ECAEDC300E41A90 /* Build configuration list for PBXNativeTarget "winkTests" */;
 			buildPhases = (
+				CA4B675266092A694FEE1D73 /* [CP] Check Pods Manifest.lock */,
 				750225F71ECAEDC300E41A90 /* Sources */,
 				750225F81ECAEDC300E41A90 /* Frameworks */,
 				750225F91ECAEDC300E41A90 /* Resources */,
+				8E81EA02DBCC0EE43B7FF95F /* [CP] Embed Pods Frameworks */,
+				0A656D2BA0D772F91F29374D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -178,9 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 750226151ECAEDC300E41A90 /* Build configuration list for PBXNativeTarget "winkUITests" */;
 			buildPhases = (
+				9D0230A2D59078E5B9B1FEE3 /* [CP] Check Pods Manifest.lock */,
 				750226021ECAEDC300E41A90 /* Sources */,
 				750226031ECAEDC300E41A90 /* Frameworks */,
 				750226041ECAEDC300E41A90 /* Resources */,
+				F355DA36656AF7D567859192 /* [CP] Embed Pods Frameworks */,
+				A5B840CF8FF96D19A7A0CA1E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				750225F51ECAEDC200E41A90 /* LaunchScreen.storyboard in Resources */,
+				7571A6F71ED3F0F000712356 /* GoogleService-Info.plist in Resources */,
 				750225F21ECAEDC200E41A90 /* Assets.xcassets in Resources */,
 				750225F01ECAEDC200E41A90 /* Main.storyboard in Resources */,
 			);
@@ -264,6 +317,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A656D2BA0D772F91F29374D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-winkTests/Pods-winkTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FADB483689739500EC0963B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8740C6E43D40F6A68DDA94BE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wink/Pods-wink-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E81EA02DBCC0EE43B7FF95F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-winkTests/Pods-winkTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D0230A2D59078E5B9B1FEE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A5B840CF8FF96D19A7A0CA1E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-winkUITests/Pods-winkUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA4B675266092A694FEE1D73 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F1DAB1B5D013EEA4C2B4F03D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wink/Pods-wink-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F355DA36656AF7D567859192 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-winkUITests/Pods-winkUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		750225E31ECAEDC200E41A90 /* Sources */ = {
@@ -424,6 +615,7 @@
 		};
 		750226101ECAEDC300E41A90 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 293917AF3ABA879FE7924B5D /* Pods-wink.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = wink/Info.plist;
@@ -436,6 +628,7 @@
 		};
 		750226111ECAEDC300E41A90 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4936F716D50B5778D6012264 /* Pods-wink.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = wink/Info.plist;
@@ -448,6 +641,7 @@
 		};
 		750226131ECAEDC300E41A90 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6FC0EEBC3EE2E1C01F3B3D6 /* Pods-winkTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -462,6 +656,7 @@
 		};
 		750226141ECAEDC300E41A90 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEB69CD64F47A87051206124 /* Pods-winkTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -476,6 +671,7 @@
 		};
 		750226161ECAEDC300E41A90 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB17C0DA4C021581CC48B923 /* Pods-winkUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = winkUITests/Info.plist;
@@ -489,6 +685,7 @@
 		};
 		750226171ECAEDC300E41A90 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 525F18FDD612A49DA2F1CAA6 /* Pods-winkUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = winkUITests/Info.plist;

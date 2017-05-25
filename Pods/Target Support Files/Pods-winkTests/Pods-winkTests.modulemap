@@ -1,0 +1,6 @@
+framework module Pods_winkTests {
+  umbrella header "Pods-winkTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

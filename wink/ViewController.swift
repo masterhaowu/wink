@@ -21,9 +21,23 @@ class ViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
         
+        
+        // if user is not logged in
+        if Auth.auth().currentUser?.uid == nil {
+            handleLogout()
+        }
+        
+        
     }
     
     func handleLogout() {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
         
         let loginController = LoginController()
         

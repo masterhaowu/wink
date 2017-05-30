@@ -39,70 +39,7 @@ class LoginController: UIViewController {
     }()
     
     
-    func handleLoginRegister() {
-        if loginRegisterSegementedControll.selectedSegmentIndex == 0 {
-            handleLogin()
-        }
-        else {
-            handleRegister()
-        }
-    }
-    
-    
-    func handleLogin() {
-        guard let email = emailTextField.text,
-            let password = passwordTextField.text else {
-                return
-        }
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            if error != nil {
-                //print(error)
-                return
-            }
-            
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func handleRegister() {
-        guard let email = emailTextField.text,
-            let password = passwordTextField.text,
-            let name = nameTextField.text else {
-            return
-        }
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
-            if error != nil {
-                print("an error has occurred")
-                //print(error)
-                return
-            }
-            
-            guard let uid = user?.uid else {
-                return
-            }
-            
-            //authentication successful
-            var ref: DatabaseReference!
-            ref = Database.database().reference()
-            
-            let usersReference = ref.child("users").child(uid)
-            
-            let values = ["name": name, "email": email]
-            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if err != nil {
-                    print("an error has occurred during updateChildValues")
-                    return
-                }
-                
-                self.dismiss(animated: true, completion: nil)
-            })
-            
-        })
         
-        
-        
-    }
-    
     
     let nameTextField: UITextField = {
         let tf = UITextField()
@@ -141,11 +78,13 @@ class LoginController: UIViewController {
     }()
     
     
-    let profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Smiley")
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -158,6 +97,10 @@ class LoginController: UIViewController {
         sc.translatesAutoresizingMaskIntoConstraints = false
         return sc
     }()
+    
+    
+    
+    
     
     func handleLoginRegisterChange() {
         

@@ -32,7 +32,8 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 return
             }
             
-            self.dismiss(animated: true, completion: nil)
+            self.messageController?.fetchUserDataAndSetupNavbarTitle();
+            self.dismiss(animated: true, completion: nil);
         }
     }
     
@@ -56,8 +57,9 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             //authentication successful
             
             let imageName = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
-            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+            let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).jpg")
+            //if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+            if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                     
                     if error != nil {
@@ -94,12 +96,20 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         
         let usersReference = ref.child("users").child(uid)
         
-        //let values = ["name": name, "email": email]
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             if err != nil {
                 print("an error has occurred during updateChildValues")
                 return
             }
+            
+            //self.messageController?.fetchUserDataAndSetupNavbarTitle()
+            //self.messageController?.navigationItem.title = values["name"] as? String;
+            let user = User();
+            user.name = values["name"] as? String;
+            user.email = values["email"] as? String;
+            user.profileImageUrl = values["profileImageUrl"] as? String;
+            
+            self.messageController?.setupNavbarWithUser(user: user);
             
             self.dismiss(animated: true, completion: nil)
         })

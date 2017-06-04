@@ -112,10 +112,17 @@ class MessageController: UITableViewController {
         nameLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true;
         
         
-        
+        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)));
         
         self.navigationItem.titleView = titleView;
         //self.navigationItem.title = user.name;
+        
+    }
+    
+    
+    func showChatController() {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewLayout());
+        navigationController?.pushViewController(chatLogController, animated: true);
     }
     
     

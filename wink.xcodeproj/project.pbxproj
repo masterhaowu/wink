@@ -21,6 +21,7 @@
 		7571A6F71ED3F0F000712356 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7571A6F61ED3F0F000712356 /* GoogleService-Info.plist */; };
 		75A60E3F1EDEACF200046DC5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A60E3E1EDEACF200046DC5 /* Extensions.swift */; };
 		75ED0B6C1ECBFBD3002F0E7E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ED0B6B1ECBFBD3002F0E7E /* LoginController.swift */; };
+		75EFC8AA1EE3A0150004C11F /* ChatFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EFC8A91EE3A0150004C11F /* ChatFileController.swift */; };
 		B038F1B59BE80AF53B93194D /* Pods_wink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22E2998A59E10D8FD63472 /* Pods_wink.framework */; };
 		E4BF0F90A88F9E79620D7C08 /* Pods_winkUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8ED0104F42E556045ECA8AD /* Pods_winkUITests.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		7571A6F61ED3F0F000712356 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A60E3E1EDEACF200046DC5 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		75ED0B6B1ECBFBD3002F0E7E /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		75EFC8A91EE3A0150004C11F /* ChatFileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFileController.swift; sourceTree = "<group>"; };
 		B8ED0104F42E556045ECA8AD /* Pods_winkUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_winkUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB17C0DA4C021581CC48B923 /* Pods-winkUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winkUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-winkUITests/Pods-winkUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EEB69CD64F47A87051206124 /* Pods-winkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-winkTests/Pods-winkTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				750225EC1ECAEDC200E41A90 /* MessageController.swift */,
 				752AF4561EDA279D0099BE39 /* NewMessageController.swift */,
 				7526C6101EDD2D49006730E1 /* LoginController+handlers.swift */,
+				75EFC8A91EE3A0150004C11F /* ChatFileController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				752AF45A1EDA31750099BE39 /* User.swift in Sources */,
 				750225EB1ECAEDC200E41A90 /* AppDelegate.swift in Sources */,
 				75A60E3F1EDEACF200046DC5 /* Extensions.swift in Sources */,
+				75EFC8AA1EE3A0150004C11F /* ChatFileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

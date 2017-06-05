@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 
 class MessageController: UITableViewController {
+    
+    var cellID = "cellID";
+    var messages = [Message]();
+    var messagesDict = [String: Message]();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +29,49 @@ class MessageController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(handleNewMessage));
         
-        checkUserLoggedIn()
+        checkUserLoggedIn();
+        
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellID);
+        
+        observeMessages();
         
         
+    }
+    
+    
+    func observeMessages() {
+        let ref = Database.database().reference().child("messages");
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: Any] {
+                let message = Message();
+                message.text = dictionary["text"] as? String;
+                message.fromID = dictionary["fromID"] as? String;
+                message.toID = dictionary["toID"] as? String;
+                message.timestamp = dictionary["timestamp"] as? Int;
+                
+                //self.messages.append(message);
+                if let toID = message.toID {
+                    self.messagesDict[toID] = message;
+                    self.messages = Array(self.messagesDict.values);
+                    self.messages.sort(by: { (message1, message2) -> Bool in
+                        if let val1 = message1.timestamp, let val2 = message2.timestamp {
+                            return val1 > val2;
+                        }
+                        return true;
+                    })
+                }
+                
+                
+                DispatchQueue.main.async {
+                    //without dispatch, this will crash because of background thread
+                    self.tableView.reloadData()
+                }
+
+                
+            }
+            
+        }, withCancel: nil)
     }
     
     
@@ -112,7 +156,7 @@ class MessageController: UITableViewController {
         nameLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true;
         
         
-        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)));
+        //titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)));
         
         self.navigationItem.titleView = titleView;
         //self.navigationItem.title = user.name;
@@ -120,8 +164,9 @@ class MessageController: UITableViewController {
     }
     
     
-    func showChatController() {
+    func showChatControllerForUser(user: User) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewLayout());
+        chatLogController.user = user;
         navigationController?.pushViewController(chatLogController, animated: true);
     }
     
@@ -129,6 +174,7 @@ class MessageController: UITableViewController {
     
     func handleNewMessage() {
         let newMessageController = NewMessageController()
+        newMessageController.messageController = self;
         let navController = UINavigationController(rootViewController: newMessageController)
         present(navController, animated: true, completion: nil)
     }
@@ -150,6 +196,43 @@ class MessageController: UITableViewController {
         present(loginController, animated: true, completion: nil)
         
         
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72;
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count;
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellID");
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! UserCell;
+        
+        let message = messages[indexPath.row];
+        cell.message = message;
+        
+//        if let toID = message.toID {
+//            let ref = Database.database().reference().child("users").child(toID);
+//            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+//                
+//                if let dictionary = snapshot.value as? [String: Any] {
+//                    cell.textLabel?.text = dictionary["name"] as? String;
+//                    
+//                    if let profilePictureUrl = dictionary["profileImageUrl"] as? String {
+//                        cell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profilePictureUrl);
+//                    }
+//                }
+//                
+//            }, withCancel: nil);
+//        }
+//        
+//        cell.detailTextLabel?.text = message.text;
+        
+        
+        return cell;
     }
 
 

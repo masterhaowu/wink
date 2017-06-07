@@ -16,27 +16,15 @@ class UserCell: UITableViewCell {
     
     var message: Message? {
         didSet{
-            if let toID = message?.toID {
-                let ref = Database.database().reference().child("users").child(toID);
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    if let dictionary = snapshot.value as? [String: Any] {
-                        self.textLabel?.text = dictionary["name"] as? String;
-                        
-                        if let profilePictureUrl = dictionary["profileImageUrl"] as? String {
-                            self.profileImageView.loadImageUsingCacheWithUrlString(urlString: profilePictureUrl);
-                        }
-                    }
-                    
-                }, withCancel: nil);
-            }
+            
+            setupNameAndProfileImage();
             
             self.detailTextLabel?.text = message?.text;
             
             if let secondsInt = message?.timestamp {
                 let seconds = Double(secondsInt);
                 let timestampdate: NSDate = NSDate(timeIntervalSince1970: seconds);
-
+                
                 //let timestampInt: Int = (message?.timestamp)!;
                 
                 let dateFormatter = DateFormatter();
@@ -46,11 +34,33 @@ class UserCell: UITableViewCell {
                 //self.timeLabel.text = timestampdate.description;
                 self.timeLabel.text = dateFormatter.string(from: (timestampdate as Date));
             }
-            
-            
+
             
         }
     };
+    
+    
+    private func setupNameAndProfileImage() {
+        
+        
+        
+        if let id = message?.chatPartnerID() {
+            let ref = Database.database().reference().child("users").child(id);
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: Any] {
+                    self.textLabel?.text = dictionary["name"] as? String;
+                    
+                    if let profilePictureUrl = dictionary["profileImageUrl"] as? String {
+                        self.profileImageView.loadImageUsingCacheWithUrlString(urlString: profilePictureUrl);
+                    }
+                }
+                
+            }, withCancel: nil);
+        }
+        
+        
+    }
     
     
     override func layoutSubviews() {

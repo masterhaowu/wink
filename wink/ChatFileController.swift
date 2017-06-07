@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 
-class ChatLogController: UICollectionViewController, UITextFieldDelegate {
+class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     
+    let cellID = "cellID";
     
     var user: User? {
         didSet {
@@ -34,10 +35,36 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         
         
         collectionView?.backgroundColor = UIColor.white;
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID);
+        
+        collectionView?.collectionViewLayout = UICollectionViewFlowLayout();
         
         
         setupInputComponents();
     }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //print("+++numberOfItems+++");
+        return 5;
+    }
+    
+    
+    
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //print("+++cellForItemAt+++");
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath);
+        cell.backgroundColor = UIColor.blue;
+        return cell;
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 80);
+    }
+    
     
     
     
@@ -48,7 +75,22 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let fromID = Auth.auth().currentUser?.uid;
         let timestamp: Int = Int(NSDate().timeIntervalSince1970);
         let values = ["text": inputTextField.text!, "toID": toID!, "fromID": fromID!, "timestamp": timestamp] as [String : Any];
-        childRef.updateChildValues(values);
+        //childRef.updateChildValues(values);
+        
+        childRef.updateChildValues(values) { (error, ref) in
+            if error != nil {
+                print(error!);
+                return;
+            }
+            
+            let userMessagesRef = Database.database().reference().child("user-messages").child(fromID!);
+            let messageID = childRef.key;
+            userMessagesRef.updateChildValues([messageID: 1]);
+            
+            let recipientUserMessageRef = Database.database().reference().child("user-messages").child(toID!);
+            recipientUserMessageRef.updateChildValues([messageID: 1]);
+        }
+        
     }
     
     

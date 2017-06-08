@@ -13,11 +13,63 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     let cellID = "cellID";
     
+    
     var user: User? {
         didSet {
             navigationItem.title = user?.name;
+            
+            observeMessages();
         }
     };
+    
+    var messages = [Message]();
+    
+    
+    func observeMessages() {
+        
+        messages.removeAll();
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return;
+        }
+        
+        let userMessageRef = Database.database().reference().child("user-messages").child(uid);
+        userMessageRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageID = snapshot.key;
+            let messageRef = Database.database().reference().child("messages").child(messageID);
+            messageRef.observeSingleEvent(of: .value, with: { (messageSnapShot) in
+                
+                guard let dictionary = messageSnapShot.value as? [String: AnyObject] else {
+                    return;
+                }
+                
+                let message = Message();
+                //message.setValuesForKeys(dictionary);
+                message.fromID = dictionary["fromID"] as? String;
+                message.toID = dictionary["toID"] as? String;
+                message.text = dictionary["text"] as? String;
+                message.timestamp = dictionary["timestamp"] as? Int;
+                
+                
+                if message.chatPartnerID() == self.user?.id {
+                    self.messages.append(message);
+                    
+                    DispatchQueue.main.async {
+                        //without dispatch, this will crash because of background thread
+                        self.collectionView?.reloadData();
+                    }
+                }
+                
+                
+
+                
+            }, withCancel: nil);
+            
+            
+        }, withCancel: nil);
+        
+    }
     
     
     lazy var inputTextField: UITextField = {
@@ -33,9 +85,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        
+        collectionView?.alwaysBounceVertical = true;
         collectionView?.backgroundColor = UIColor.white;
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID);
+        collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellID);
         
         collectionView?.collectionViewLayout = UICollectionViewFlowLayout();
         
@@ -46,7 +98,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //print("+++numberOfItems+++");
-        return 5;
+        return messages.count;
     }
     
     
@@ -55,8 +107,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //print("+++cellForItemAt+++");
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath);
-        cell.backgroundColor = UIColor.blue;
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ChatMessageCell;
+        
+        let message = messages[indexPath.item];
+        cell.textView.text = message.text;
+        //cell.backgroundColor = UIColor.blue;
         return cell;
     }
     
@@ -99,6 +154,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         let containerView = UIView();
         containerView.translatesAutoresizingMaskIntoConstraints = false;
+        containerView.backgroundColor = UIColor.white;
         
         view.addSubview(containerView);
         //containerView.backgroundColor = UIColor.brown;

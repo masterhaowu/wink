@@ -34,11 +34,12 @@ class MessageController: UITableViewController {
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID);
         
         //observeMessages();
-        observeUserMessages();
+        //observeUserMessages();
         
     }
-    
-    func observeUserMessages() {
+
+    /*
+    func observeUserMessagesOld() {
         
         //print("+++observeUserMessages+++");
         
@@ -64,8 +65,8 @@ class MessageController: UITableViewController {
                     message.timestamp = dictionary["timestamp"] as? Int;
                     
                     //self.messages.append(message);
-                    if let toID = message.toID {
-                        self.messagesDict[toID] = message;
+                    if let chatPartnerID = message.chatPartnerID() {
+                        self.messagesDict[chatPartnerID] = message;
                         self.messages = Array(self.messagesDict.values);
                         self.messages.sort(by: { (message1, message2) -> Bool in
                             if let val1 = message1.timestamp, let val2 = message2.timestamp {
@@ -75,11 +76,9 @@ class MessageController: UITableViewController {
                         })
                     }
                     
+                    self.timer?.invalidate();
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false);
                     
-                    DispatchQueue.main.async {
-                        //without dispatch, this will crash because of background thread
-                        self.tableView.reloadData()
-                    }
                     
                     
                 }
@@ -91,46 +90,104 @@ class MessageController: UITableViewController {
         }, withCancel: nil);
         
     }
+    */
     
-    
-    func observeMessages() {
-        let ref = Database.database().reference().child("messages");
-        ref.observe(.childAdded, with: { (snapshot) in
+    func observeUserMessages() {
+        
+        print("+++observeUserMessages+++");
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return;
+        }
+        
+        let ref = Database.database().reference().child("user-messages").child(uid);
+        
+        
+        
+        ref.observe(.value, with: { (snapshot) in
+            print("observe values for messages");
+            var totalMessages = 1;
+            self.messagesDict.removeAll();
+            self.messages.removeAll();
             
-            if let dictionary = snapshot.value as? [String: Any] {
-                let message = Message();
-                message.text = dictionary["text"] as? String;
-                message.fromID = dictionary["fromID"] as? String;
-                message.toID = dictionary["toID"] as? String;
-                message.timestamp = dictionary["timestamp"] as? Int;
+            let childrenCount = Int(snapshot.childrenCount);
+            for snap in snapshot.children {
+                let messageID = (snap as! DataSnapshot).key;
+                let messagesRef = Database.database().reference().child("messages").child(messageID);
                 
-                //self.messages.append(message);
-                if let toID = message.toID {
-                    self.messagesDict[toID] = message;
-                    self.messages = Array(self.messagesDict.values);
-                    self.messages.sort(by: { (message1, message2) -> Bool in
-                        if let val1 = message1.timestamp, let val2 = message2.timestamp {
-                            return val1 > val2;
+                messagesRef.observeSingleEvent(of: .value, with: { (snapshotMessage) in
+                    
+                    guard let dictionary = snapshotMessage.value as? [String: Any] else {
+                        return;
+                    }
+                    
+                    let message = Message();
+                    message.text = dictionary["text"] as? String;
+                    message.fromID = dictionary["fromID"] as? String;
+                    message.toID = dictionary["toID"] as? String;
+                    message.timestamp = dictionary["timestamp"] as? Int;
+                    
+                    //self.messages.append(message);
+                    totalMessages += 1;
+                    if let chatPartnerID = message.chatPartnerID() {
+                        if let oldMessage = self.messagesDict[chatPartnerID] {
+                            if message.timestamp! > oldMessage.timestamp! {
+                                self.messagesDict[chatPartnerID] = message;
+                            }
+                        } else {
+                            self.messagesDict[chatPartnerID] = message;
                         }
-                        return true;
-                    })
-                }
-                
-                
-                DispatchQueue.main.async {
-                    //without dispatch, this will crash because of background thread
-                    self.tableView.reloadData()
-                }
-
+                        
+                        //print(message.text as? String);
+                        self.messages = Array(self.messagesDict.values);
+                        self.messages.sort(by: { (message1, message2) -> Bool in
+                            if let val1 = message1.timestamp, let val2 = message2.timestamp {
+                                return val1 > val2;
+                            }
+                            return true;
+                        })
+                    }
+                    
+                    //print("childrenCount is :");
+                    //print(childrenCount);
+                    //print("and totalMessage is: ");
+                    //print(totalMessages);
+                    
+                    if childrenCount == totalMessages {
+                        self.handleReloadTable();
+                    }
+                    
+                    
+                    
+                }, withCancel: nil)
                 
             }
             
-        }, withCancel: nil)
+            //self.handleReloadTable();
+            
+        }, withCancel: nil);
+        
+    }
+
+    
+    var timer: Timer?;
+    
+    
+    func handleReloadTable() {
+        DispatchQueue.main.async {
+            //without dispatch, this will crash because of background thread
+            print("table reloaded");
+            //print(self.messages);
+            self.tableView.reloadData()
+            
+        }
+
     }
     
     
     func checkUserLoggedIn()
     {
+        print("+++checkUserLoggedIn+++");
         // if user is not logged in
         if Auth.auth().currentUser?.uid == nil {
             handleLogout()

@@ -106,60 +106,78 @@ class MessageController: UITableViewController {
         
         ref.observe(.value, with: { (snapshot) in
             print("observe values for messages");
-            var totalMessages = 1;
+            //var userCount = 0;
+            //var messageCount = 0;
+            var totalMessageCount = 0;
+            var totalMessages = 0;
             self.messagesDict.removeAll();
             self.messages.removeAll();
             
-            let childrenCount = Int(snapshot.childrenCount);
-            for snap in snapshot.children {
-                let messageID = (snap as! DataSnapshot).key;
-                let messagesRef = Database.database().reference().child("messages").child(messageID);
+            //let lastUser = Int(snapshot.childrenCount);
+            //loop through snapshot once to get totalMessages
+            for userSnap in snapshot.children {
+                totalMessages += Int((userSnap as! DataSnapshot).childrenCount);
+            }
+            
+            for userSnap in snapshot.children {
+                //increment userCount, reset messageCount
+                //userCount += 1;
+                //print("userCount is: ", userCount);
+                //messageCount = 0;
                 
-                messagesRef.observeSingleEvent(of: .value, with: { (snapshotMessage) in
+                
+            
+                for messageSnap in (userSnap as! DataSnapshot).children {
+                    //increment messageCount
+                    //messageCount += 1;
                     
-                    guard let dictionary = snapshotMessage.value as? [String: Any] else {
-                        return;
-                    }
+                    let messageID = (messageSnap as! DataSnapshot).key;
+                    let messagesRef = Database.database().reference().child("messages").child(messageID);
                     
-                    let message = Message();
-                    message.text = dictionary["text"] as? String;
-                    message.fromID = dictionary["fromID"] as? String;
-                    message.toID = dictionary["toID"] as? String;
-                    message.timestamp = dictionary["timestamp"] as? Int;
-                    
-                    //self.messages.append(message);
-                    totalMessages += 1;
-                    if let chatPartnerID = message.chatPartnerID() {
-                        if let oldMessage = self.messagesDict[chatPartnerID] {
-                            if message.timestamp! > oldMessage.timestamp! {
-                                self.messagesDict[chatPartnerID] = message;
-                            }
-                        } else {
-                            self.messagesDict[chatPartnerID] = message;
+                    messagesRef.observeSingleEvent(of: .value, with: { (snapshotMessage) in
+                        totalMessageCount += 1;
+                        //print("userCount at observation is: ", userCount);
+                        guard let dictionary = snapshotMessage.value as? [String: Any] else {
+                            return;
                         }
                         
-                        //print(message.text as? String);
-                        self.messages = Array(self.messagesDict.values);
-                        self.messages.sort(by: { (message1, message2) -> Bool in
-                            if let val1 = message1.timestamp, let val2 = message2.timestamp {
-                                return val1 > val2;
+                        let message = Message();
+                        message.text = dictionary["text"] as? String;
+                        message.fromID = dictionary["fromID"] as? String;
+                        message.toID = dictionary["toID"] as? String;
+                        message.timestamp = dictionary["timestamp"] as? Int;
+                        
+                        //self.messages.append(message);
+                        //totalMessages += 1;
+                        if let chatPartnerID = message.chatPartnerID() {
+                            if let oldMessage = self.messagesDict[chatPartnerID] {
+                                if message.timestamp! > oldMessage.timestamp! {
+                                    self.messagesDict[chatPartnerID] = message;
+                                }
+                            } else {
+                                self.messagesDict[chatPartnerID] = message;
                             }
-                            return true;
-                        })
-                    }
+                            
+
+                        }
+                        
+
+                        
+                        //print("totalMessageCount is: ", totalMessageCount);
+                        //print("totalMessages is: ", totalMessages);
+                        
+                        if totalMessageCount == totalMessages {
+                            self.handleReloadTable();
+                        }
+                        
+                        
+                        
+                    }, withCancel: nil);
                     
-                    //print("childrenCount is :");
-                    //print(childrenCount);
-                    //print("and totalMessage is: ");
-                    //print(totalMessages);
-                    
-                    if childrenCount == totalMessages {
-                        self.handleReloadTable();
-                    }
-                    
-                    
-                    
-                }, withCancel: nil)
+                }
+            
+                
+                
                 
             }
             
@@ -174,6 +192,13 @@ class MessageController: UITableViewController {
     
     
     func handleReloadTable() {
+        self.messages = Array(self.messagesDict.values);
+        self.messages.sort(by: { (message1, message2) -> Bool in
+            if let val1 = message1.timestamp, let val2 = message2.timestamp {
+                return val1 > val2;
+            }
+            return true;
+        })
         DispatchQueue.main.async {
             //without dispatch, this will crash because of background thread
             print("table reloaded");
